@@ -3,30 +3,54 @@ let todoItems = [];
 
 
 function addTodo(text) {
-    todoItems.push(text)
+
+    const newTodo = {
+        content: text,
+        checked: false,
+        id: todoItems.length
+    }
+    todoItems.push(newTodo)
     // This function will create a new todo object based on the
     // text that was entered in the text input, and push it into
     // the `todoItems` array
     console.log(todoItems);
+    renderTodo(newTodo)
 }
 
 function renderTodo(todo) {
     // Select the first element with a class of `js-todo-list`
-    const ulListe = document.getElementsByClassName("todo-list")[0];
+    const ul = document.getElementsByClassName("todo-list")[0];
 
     // Create an `li` element and assign it to the`ul`
-    const liListe = document.createElement("li");
+    const li = document.createElement("li");
+    li.textContent = todo.content;
+    li.setAttribute('id', todo.id);
+
+    let button = document.createElement("button");
+    button.classList.add
+    button.textContent = 'check'
+    button.addEventListener('click', () => {
+        const liToDelete = document.getElementById(todo.id);
+        ul.removeChild(liToDelete)
+    })
+    li.appendChild(button)
+    ul.appendChild(li)
+
+
     // Set the contents of the `li` element created above
-    liListe.textContent = todoItems[todoItems.length-1]
+
     // Append the element to the DOM as the last child of
     // the element referenced by the `list` variable
-    ulListe.appendChild(liListe)
-    console.log(ulListe);
+
+    console.log(ul);
 
 }
 
+
 function toggleDone(key) {
-    
+
+
+
     // Locate the todo item in the todoItems array and set its checked
     // property to the opposite. That means, `true` will become `false` and vice
     // versa.
@@ -52,5 +76,5 @@ form.addEventListener('submit', event => {
     console.log(valueText);
     // send the value to the addTodo function
     addTodo(valueText)
-    renderTodo(null)
+    //renderTodo(null)
 });
